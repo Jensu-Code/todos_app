@@ -1,0 +1,45 @@
+<div class="card-container" [ngClass]="{
+    'first': first(),
+    'last': last(),
+    'odd': odd(),
+    'even': even()
+  }"
+  >
+    @if (todo()) {
+        <span class="icon-close" (click)="isOnclick.emit(todo())">x</span>
+        <div class="card-body">
+            <div class="card-content">
+                <h3>{{todo().id}} {{todo().title}}</h3>
+                <p>{{todo().description}}</p>
+            </div>
+        </div>
+        <div class="card-content pills-container">
+            <p>Estado:
+                <span class="status to-do" [ngStyle]="{
+                    'background-color' : todo().color.status
+                }">
+                    {{todo().status}}
+                </span>
+            </p>
+            <p>Prioridad:
+                <span class="priority">
+                    {{priority}}
+                </span>
+            </p>
+            <p>Fecha límite: {{todo().deadLine | date}}</p>
+
+        </div>
+        <section class="progressbar-container">
+            <div class="progressbar" [attr.data-progress-range]="range">
+                <div class="progressbar__fill" [ngStyle]="{
+                'width': progress +'%'
+                }">
+                </div>
+            </div>
+            <span>{{todo().progress| percent }}</span>
+        </section>
+    } @else {
+      No hay datos
+    }
+
+</div>
